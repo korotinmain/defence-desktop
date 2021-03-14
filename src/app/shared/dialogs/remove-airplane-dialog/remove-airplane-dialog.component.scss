@@ -1,0 +1,45 @@
+@import "src/assets/styles/colors";
+
+:host {
+  .wrapper {
+    h1 {
+      font-size: 20px;
+    }
+
+    .buttons-container {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      margin-top: 20px;
+      height: 4em;
+
+      button {
+        width: 8em;
+        border: none;
+        outline: none;
+        color: $color-white;
+      }
+
+      .disagree {
+        background: $main-color;
+
+        &:hover {
+          border: 1px solid $main-color;
+          color: $main-color;
+          background: $color-white;
+        }
+      }
+
+      .agree {
+        background: $color-red;
+
+        &:hover {
+          border: 1px solid $color-red;
+          color: $color-red;
+          background: $color-white;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,50 @@
+<div class="selected-airplane" *ngIf="selectedAirplane">
+  <span class="airplane-label">Обраний ЛА - {{selectedAirplane.airplaneName}}</span>
+  <button class="btn change-button" (click)="onAirplaneChange()">Змінити</button>
+  <button class="btn add-button ml-10" (click)="submitForm()">Додати</button>
+</div>
+<app-airplane-select *ngIf="!selectedAirplane"
+                     (airplaneSelectEvent)="onAirplaneSelect($event)"></app-airplane-select>
+
+<div class="calculator-form" *ngIf="selectedAirplane">
+  <form [formGroup]="airplaneFormGroup">
+    <div class="form-container" [formGroupName]="selectedAirplane.airplaneControlName">
+      <div class="outfit" [formGroupName]="group.groupControlName"
+           *ngFor="let group of selectedAirplane.outfitGroups">
+        <div class="outfit-controls" formGroupName="controls">
+          <p class="outfit-label">{{group.groupName}}</p>
+          <div class="outfit-group" *ngFor="let outfitGroup of group.outfits; index as i">
+            <div class="type-container">
+              <label [for]="'select-type' + i">Тип</label>
+              <select [formControlName]="'control_' + i" [id]="'select-type' + i">
+                <option value=""></option>
+                <option [value]="option" *ngFor="let option of outfitGroup.values">{{option}}</option>
+              </select>
+            </div>
+            <div class="count-container">
+              <label [for]="'count-control' + i">Кількість</label>
+              <input [id]="'count-control' + i" type="number" [formControlName]="'countControl' + i">
+            </div>
+          </div>
+        </div>
+        <div class="coefficients" formGroupName="coefficients">
+          <div class="coefficient" *ngFor="let coefficient of coefficients">
+            <app-coefficient [config]="coefficient"></app-coefficient>
+            <input [formControlName]="coefficient.name" type="text">
+          </div>
+        </div>
+      </div>
+      <div class="aviation-count-container">
+        <div class="first-flying">
+          <label for="first-flying-control">Кількість ЛА у першому вильоті, од.</label>
+          <input formControlName="firstFlying" id="first-flying-control" type="number">
+        </div>
+        <div class="flying-resource">
+          <label for="flying-resource-control">Виділений льотний ресурс, бр/в</label>
+          <input formControlName="flyingResource" id="flying-resource-control" type="number">
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+

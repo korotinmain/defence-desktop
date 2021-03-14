@@ -1,0 +1,30 @@
+@import "src/assets/styles/colors";
+
+:host {
+  .coefficient-container {
+    color: $color-white;
+    position: relative;
+    width: 3em;
+
+    .label {
+      position: relative;
+      font-size: 50px;
+    }
+
+    .top-label {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 11px;
+      text-align: left;
+    }
+
+    .bottom-label {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 11px;
+      text-align: center;
+    }
+  }
+}

@@ -1,0 +1,12 @@
+<div class="airplane-select-container">
+  <div class="wrapper">
+    <h1>Виберіть тип ЛА</h1>
+    <ul class="airplanes-list">
+      <ng-container *ngFor="let airplane of airplaneTypes">
+        <li (click)="selectAirplane(airplane)"
+            [class.disabled]="isAirplaneAdded(airplane)"
+            class="airplane-list-item">{{airplane.airplaneName}}</li>
+      </ng-container>
+    </ul>
+  </div>
+</div>

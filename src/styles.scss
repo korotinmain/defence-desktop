@@ -1,0 +1,67 @@
+@import "src/assets/styles/fonts";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "src/assets/styles/colors";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Nunito', Fallback, sans-serif;
+}
+
+html {
+  height: 100vh;
+}
+
+body {
+  box-sizing: border-box;
+  margin: 0;
+  height: 100vh;
+  background: $bg-color;
+  background: $bg-color;
+}
+
+.app {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: stretch;
+  height: 100vh;
+
+  &__container {
+    display: flex;
+    flex-grow: 1;
+    overflow-y: auto;
+  }
+}
+
+.main-content {
+  display: block;
+  flex: 1 0 0;
+  position: relative;
+  overflow-y: auto;
+
+  &_align_center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.btn {
+  background: $main-color;
+  width: 8em;
+  color: $bg-color;
+  padding: 10px;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    border: 1px solid $main-color;
+    background: none;
+  }
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
