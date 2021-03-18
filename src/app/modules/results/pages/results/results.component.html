@@ -1,1 +1,87 @@
-<p>results works!</p>
+<div class="results-container" *ngIf="(addedAirplanes$ | async) as addedAirplanes">
+  <div class="header-text">
+    <p>Кількість літаків, що приймають участь в операції: </p>
+  </div>
+  <div class="toggles">
+    <mat-button-toggle-group name="airplanes" aria-label="Airplanes">
+      <mat-button-toggle *ngFor="let airplane of addedAirplanes"
+                         [value]="airplane.airplaneName.toLowerCase()">{{airplane.airplaneName}}</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+  <div class="content">
+    <div class="grid-container">
+      <div class="grid-item a">
+        <div class="row a">Тип АЗУ</div>
+      </div>
+      <div class="grid-item b">
+        <div class="row a">Кількість АЗУ, що підвішені під крило ЛА</div>
+        <div class="row b">од.</div>
+      </div>
+      <div class="grid-item c">
+          <div class="row a">Вага одного зразка у тарі / дерев. ящ. з АН</div>
+          <div class="row b">т.</div>
+      </div>
+      <div class="grid-item d">
+        <div class="row a">Об'єм одного зразка у тарі / дерев. ящ. з АН</div>
+        <div class="row b">м.куб</div>
+      </div>
+      <div class="grid-item e">
+        <div class="row a">Потреба у ВЗ АЗУ на основному аеродромі</div>
+        <div class="row b">
+          <div class="column a">од.</div>
+          <div class="column b">БК</div>
+        </div>
+      </div>
+      <div class="grid-item f">
+        <div class="row a">Розрахункова потреба АЗУ на операцію</div>
+        <div class="row b">
+          <div class="column a">од.</div>
+          <div class="column b">БК</div>
+        </div>
+      </div>
+      <div class="grid-item g">
+        <div class="row a">Необхідно підвезти з Ц., АРС, асРОіБ</div>
+        <div class="row b">од.</div>
+      </div>
+      <div class="grid-item h">
+        <div class="row a">Потреба у транспортних засобах для постачання АЗУ на аеродром</div>
+        <div class="row b">
+          <div class="column">КАМАЗ</div>
+          <div class="column">Умовний вагон</div>
+          <div class="column">Іл-76</div>
+          <div class="column">Ан-26</div>
+        </div>
+        <div class="row c">
+          <div class="column">8</div>
+          <div class="column">10</div>
+          <div class="column">29</div>
+          <div class="column">98</div>
+          <div class="column">40</div>
+          <div class="column">234,6</div>
+          <div class="column">5,5</div>
+          <div class="column">45,7</div>
+        </div>
+        <div class="row d">
+          <div class="column">по масі, т.</div>
+          <div class="column">по об’єму, м.куб</div>
+          <div class="column">по масі, т.</div>
+          <div class="column">по об’єму, м.куб</div>
+          <div class="column">по масі, т.</div>
+          <div class="column">по об’єму, м.куб</div>
+          <div class="column">по масі, т.</div>
+          <div class="column">по об’єму, м.куб</div>
+        </div>
+        <div class="row e">
+          <div class="column">од.</div>
+          <div class="column">од.</div>
+          <div class="column">од.</div>
+          <div class="column">од.</div>
+          <div class="column">од.</div>
+          <div class="column">од.</div>
+          <div class="column">од.</div>
+          <div class="column">од.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

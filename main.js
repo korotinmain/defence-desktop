@@ -7,7 +7,7 @@ function createWindow() {
     width: 900,
     height: 900,
     minHeight: 900,
-    minWidth: 900,
+    minWidth: 1200,
     backgroundColor: '#09121d',
     icon: `file://${__dirname}/dist/assets/airplane.jpg`,
   });

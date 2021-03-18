@@ -1,0 +1,108 @@
+:host {
+  .results-container {
+    .toggles {
+      width: 100%;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .content {
+      color: white;
+      padding: 20px;
+
+      .grid-container {
+        display: grid;
+        grid-template-columns: repeat(7, 100px) 1fr;
+
+        .grid-item {
+          border: 1px dashed white;
+          display: grid;
+          grid-template-rows: repeat(5, 1fr);
+          align-items: center;
+          font-size: 12px;
+          border-right: none;
+
+          &:last-child {
+            border-right: 1px dashed white;
+          }
+
+          .row, .column {
+            height: 100%;
+            align-items: center;
+            display: grid;
+          }
+
+          &.a {
+            .row.a {
+              grid-row: 1 / 6 !important;
+            }
+          }
+
+          &.a, &.b, &.c, &.d, &.e, &.f, &.g {
+            text-align: center;
+
+            .row.a {
+              grid-row: 1 / 5;
+            }
+
+            .row.b {
+              border-top: 1px dashed white;
+            }
+          }
+
+          &.e, &.f {
+            .row.b {
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+
+              .column.b {
+                border-left: 1px dashed white;
+              }
+            }
+          }
+
+          &.h {
+            .row {
+              text-align: center;
+              border-bottom: 1px dashed white;
+
+              .column {
+                border-right: 1px dashed white;
+
+                &:last-child {
+                  border-right: none;
+                }
+              }
+
+              &.a {
+
+              }
+
+              &.b {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+              }
+
+              &.c, &.d, &.e {
+                display: grid;
+                grid-template-columns: repeat(8, 1fr);
+              }
+
+              &.d {
+                .column {
+                  //padding: 0 5px;
+                }
+              }
+
+              &.e {
+                border-bottom: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
