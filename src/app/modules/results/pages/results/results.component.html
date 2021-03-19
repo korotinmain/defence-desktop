@@ -1,15 +1,15 @@
-<div class="results-container" *ngIf="(addedAirplanes$ | async) as addedAirplanes">
+<div class="results-container">
   <div class="header-text">
-    <p>Кількість літаків, що приймають участь в операції: </p>
+    <p>Кількість літаків, що приймають участь в операції: {{selectedAirplane?.result.flyingResource}}</p>
   </div>
-  <div class="toggles">
-    <mat-button-toggle-group name="airplanes" aria-label="Airplanes">
-      <mat-button-toggle *ngFor="let airplane of addedAirplanes"
-                         [value]="airplane.airplaneName.toLowerCase()">{{airplane.airplaneName}}</mat-button-toggle>
-    </mat-button-toggle-group>
-  </div>
+<!--  <div class="toggles">-->
+<!--    <mat-button-toggle-group name="airplanes" aria-label="Airplanes">-->
+<!--      <mat-button-toggle *ngFor="let airplane of addedAirplanes"-->
+<!--                         [value]="airplane.airplaneName.toLowerCase()">{{airplane.airplaneName}}</mat-button-toggle>-->
+<!--    </mat-button-toggle-group>-->
+<!--  </div>-->
   <div class="content">
-    <div class="grid-container">
+    <div class="grid-container header">
       <div class="grid-item a">
         <div class="row a">Тип АЗУ</div>
       </div>
@@ -18,8 +18,8 @@
         <div class="row b">од.</div>
       </div>
       <div class="grid-item c">
-          <div class="row a">Вага одного зразка у тарі / дерев. ящ. з АН</div>
-          <div class="row b">т.</div>
+        <div class="row a">Вага одного зразка у тарі / дерев. ящ. з АН</div>
+        <div class="row b">т.</div>
       </div>
       <div class="grid-item d">
         <div class="row a">Об'єм одного зразка у тарі / дерев. ящ. з АН</div>
@@ -80,6 +80,30 @@
           <div class="column">од.</div>
           <div class="column">од.</div>
           <div class="column">од.</div>
+        </div>
+      </div>
+    </div>
+    <div class="body" *ngIf="selectedAirplane && parsedModulesData.length">
+      <div class="airplane-data" *ngFor="let resource of parsedModulesData">
+        <div class="header">{{resource.resourceType}}</div>
+        <div class="info" *ngFor="let module of resource.modules">
+          <div class="column">{{module.type}}</div>
+          <div class="column">{{module.count}}</div>
+          <div class="column">1</div>
+          <div class="column">1</div>
+          <div class="column">1</div>
+          <div class="column">1</div>
+          <div class="column">{{module.value}}</div>
+          <div class="column">1</div>
+          <div class="column">1</div>
+          <div class="column">1</div>
+          <div class="column">1</div>
+          <div class="column">1</div>
+          <div class="column">1</div>
+          <div class="column">1</div>
+          <div class="column">1</div>
+          <div class="column">1</div>
+          <div class="column">1</div>
         </div>
       </div>
     </div>
