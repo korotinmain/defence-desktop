@@ -4,5 +4,4 @@ export type LoadingRatesType = {
   size: string;
   weight: number;
   capacity: number;
-  ammunitionRequirement: number;
 };

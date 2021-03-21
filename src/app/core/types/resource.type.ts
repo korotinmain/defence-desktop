@@ -3,6 +3,7 @@ export type ResourceType = {
   flyingResource: number;
   firstFlying: number;
   modules: Array<ModuleType>;
+  airplaneName: string;
 };
 
 export type ModuleType = {

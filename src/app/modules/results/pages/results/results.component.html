@@ -1,6 +1,21 @@
 <div class="results-container">
   <div class="back-button" [routerLink]="['/']">
-    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 512 512" xml:space="preserve"><g><g><path d="M492,236H68.442l70.164-69.824c7.829-7.792,7.859-20.455,0.067-28.284c-7.792-7.83-20.456-7.859-28.285-0.068 l-104.504,104c-0.007,0.006-0.012,0.013-0.018,0.019c-7.809,7.792-7.834,20.496-0.002,28.314c0.007,0.006,0.012,0.013,0.018,0.019 l104.504,104c7.828,7.79,20.492,7.763,28.285-0.068c7.792-7.829,7.762-20.492-0.067-28.284L68.442,276H492 c11.046,0,20-8.954,20-20C512,244.954,503.046,236,492,236z"/></g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 512 512" xml:space="preserve"><g><g><path d="M492,236H68.442l70.164-69.824c7.829-7.792,7.859-20.455,0.067-28.284c-7.792-7.83-20.456-7.859-28.285-0.068 l-104.504,104c-0.007,0.006-0.012,0.013-0.018,0.019c-7.809,7.792-7.834,20.496-0.002,28.314c0.007,0.006,0.012,0.013,0.018,0.019 l104.504,104c7.828,7.79,20.492,7.763,28.285-0.068c7.792-7.829,7.762-20.492-0.067-28.284L68.442,276H492 c11.046,0,20-8.954,20-20C512,244.954,503.046,236,492,236z"/></g></g>
+      <g></g>
+      <g></g>
+      <g></g>
+      <g></g>
+      <g></g>
+      <g></g>
+      <g></g>
+      <g></g>
+      <g></g>
+      <g></g>
+      <g></g>
+      <g></g>
+      <g></g>
+      <g></g>
+      <g></g></svg>
   </div>
   <div class="added-airplanes" *ngIf="(addedAirplanes$ | async) as addedAirplanes">
     <div class="airplane"
@@ -45,8 +60,8 @@
         </div>
       </div>
       <div class="grid-item g">
-        <div class="row a">Необхідно підвезти з Ц., АРС, асРОіБ</div>
-        <div class="row b">од.</div>
+        <div class="row a green">Необхідно підвезти з Ц., АРС, асРОіБ</div>
+        <div class="row b green">од.</div>
       </div>
       <div class="grid-item h">
         <div class="row a">Потреба у транспортних засобах для постачання АЗУ на аеродром</div>
@@ -67,24 +82,24 @@
           <div class="column">45,7</div>
         </div>
         <div class="row d">
-          <div class="column">по масі, т.</div>
-          <div class="column">по об’єму, м.куб</div>
-          <div class="column">по масі, т.</div>
-          <div class="column">по об’єму, м.куб</div>
-          <div class="column">по масі, т.</div>
-          <div class="column">по об’єму, м.куб</div>
-          <div class="column">по масі, т.</div>
-          <div class="column">по об’єму, м.куб</div>
+          <div class="column light">по масі, т.</div>
+          <div class="column dark">по об’єму, м.куб</div>
+          <div class="column light">по масі, т.</div>
+          <div class="column dark">по об’єму, м.куб</div>
+          <div class="column light">по масі, т.</div>
+          <div class="column dark">по об’єму, м.куб</div>
+          <div class="column light">по масі, т.</div>
+          <div class="column dark">по об’єму, м.куб</div>
         </div>
         <div class="row e">
-          <div class="column">од.</div>
-          <div class="column">од.</div>
-          <div class="column">од.</div>
-          <div class="column">од.</div>
-          <div class="column">од.</div>
-          <div class="column">од.</div>
-          <div class="column">од.</div>
-          <div class="column">од.</div>
+          <div class="column light">од.</div>
+          <div class="column dark">од.</div>
+          <div class="column light">од.</div>
+          <div class="column dark">од.</div>
+          <div class="column light">од.</div>
+          <div class="column dark">од.</div>
+          <div class="column light">од.</div>
+          <div class="column dark">од.</div>
         </div>
       </div>
     </div>
@@ -97,19 +112,27 @@
           <div class="column">{{getWeight(module.type)}}</div>
           <div class="column">{{getCapacity(module.type)}}</div>
           <div
-            class="column">{{getAmmunitionRequirement(module.type, resource.flyingResource)}}</div>
-          <div class="column">{{getRate(module.type).ammunitionRequirement}}</div>
+            class="column">{{getAmmunitionRequirement(module.type, resource.flyingResource, resource.airplaneName)}}</div>
+          <div class="column">{{getAmmunitionRequirementCoefficient(module.type, resource.airplaneName)}}</div>
           <div class="column">{{module.value}}</div>
-          <div class="column">{{getEstimatedNeed(module, resource.flyingResource)}}</div>
-          <div class="column">{{getNeedToGiveRide(module, resource.flyingResource)}}</div>
-          <div class="column">{{getTypeRequirementsWeight(module, resource.flyingResource, 8)}}</div>
-          <div class="column">{{getTypeRequirementsCapacity(module, resource.flyingResource, 10)}}</div>
-          <div class="column">{{getTypeRequirementsWeight(module, resource.flyingResource, 29)}}</div>
-          <div class="column">{{getTypeRequirementsCapacity(module, resource.flyingResource, 98)}}</div>
-          <div class="column">{{getTypeRequirementsWeight(module, resource.flyingResource, 40)}}</div>
-          <div class="column">{{getTypeRequirementsCapacity(module, resource.flyingResource, 234.6)}}</div>
-          <div class="column">{{getTypeRequirementsWeight(module, resource.flyingResource, 5.5)}}</div>
-          <div class="column">{{getTypeRequirementsCapacity(module, resource.flyingResource, 45.7)}}</div>
+          <div class="column yellow">{{getEstimatedNeed(module, resource.flyingResource, resource.airplaneName)}}</div>
+          <div class="column green">{{getNeedToGiveRide(module, resource.flyingResource, resource.airplaneName)}}</div>
+          <div
+            class="column dark">{{getTypeRequirementsWeight(module, resource.flyingResource, 8, resource.airplaneName)}}</div>
+          <div
+            class="column light">{{getTypeRequirementsCapacity(module, resource.flyingResource, 10, resource.airplaneName)}}</div>
+          <div
+            class="column dark">{{getTypeRequirementsWeight(module, resource.flyingResource, 29, resource.airplaneName)}}</div>
+          <div
+            class="column light">{{getTypeRequirementsCapacity(module, resource.flyingResource, 98, resource.airplaneName)}}</div>
+          <div
+            class="column dark">{{getTypeRequirementsWeight(module, resource.flyingResource, 40, resource.airplaneName)}}</div>
+          <div
+            class="column light">{{getTypeRequirementsCapacity(module, resource.flyingResource, 234.6, resource.airplaneName)}}</div>
+          <div
+            class="column dark">{{getTypeRequirementsWeight(module, resource.flyingResource, 5.5, resource.airplaneName)}}</div>
+          <div
+            class="column light">{{getTypeRequirementsCapacity(module, resource.flyingResource, 45.7, resource.airplaneName)}}</div>
         </div>
       </div>
     </div>

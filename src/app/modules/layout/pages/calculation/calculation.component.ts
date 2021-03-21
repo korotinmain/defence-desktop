@@ -3,7 +3,7 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {AddedAirplanesService} from '../../../../core/services/added-airplanes.service';
 import {AirplaneType} from '../../../../core/types/airplane.type';
 import {CoefficientType} from '../../../../core/types/coefficient.type';
-import {AIRPLANES_DATA} from './calculation.constants';
+import {AIRPLANES_DATA} from '../../../../core/constants/calculation.constants';
 import {COEFFICIENTS} from '../../../../core/constants/coefficients.constant';
 import {Subject} from 'rxjs';
 import {CoefficientEnum} from '../../../../core/enums/coefficient.enum';
@@ -152,7 +152,9 @@ export class CalculationComponent implements OnInit, OnDestroy {
     };
     this.addedAirplanesService.addNewAirplane(airplane);
     this.selectedAirplane = null;
-    this.cdr.detectChanges();
+    if (!this.cdr['destroyed']) {
+      this.cdr.detectChanges();
+    }
   }
 
   ngOnDestroy(): void {

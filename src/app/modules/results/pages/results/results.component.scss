@@ -88,6 +88,28 @@
       flex-direction: column;
       justify-content: center;
 
+      .column, .row {
+        &.yellow {
+          background: #c6c639;
+        }
+
+        &.green {
+          background: mediumseagreen;
+        }
+
+        &.milk {
+          background: #7072f8;
+        }
+
+        &.light {
+          background: #e7c65e;
+        }
+
+        &.dark {
+          background: #53c5e3;
+        }
+      }
+
       .grid-container.header {
         display: grid;
         grid-template-columns: 120px repeat(6, 85px) 500px;

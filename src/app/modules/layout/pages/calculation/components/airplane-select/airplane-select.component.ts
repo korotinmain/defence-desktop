@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
 import {AirplaneType} from '../../../../../../core/types/airplane.type';
-import {AIRPLANES_DATA} from '../../calculation.constants';
+import {AIRPLANES_DATA} from '../../../../../../core/constants/calculation.constants';
 import {AddedAirplanesService} from '../../../../../../core/services/added-airplanes.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';

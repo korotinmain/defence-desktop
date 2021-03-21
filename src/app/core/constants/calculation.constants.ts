@@ -1,16 +1,17 @@
-import {AirplaneType} from '../../../../core/types/airplane.type';
+import {AirplaneType} from '../types/airplane.type';
 import {
   ADJUSTED_AVIATION_BOMBS_VALUES,
   AIR_AIR_FIRST_VALUES,
   AIR_AIR_SECOND_VALUES,
   AIR_AIR_THIRD_VALUES,
   AIR_GROUND_VALUES, AVIATION_AMMUNITION_VALUES, AVIATION_BOMBS_VALUES, UNCORRECTED_AVIATION_ROCKETS_VALUES,
-} from '../../../../core/constants/outfit-values.constant';
-import {GroupNameEnum} from '../../../../core/enums/group-name.enum';
+} from './outfit-values.constant';
+import {GroupNameEnum} from '../enums/group-name.enum';
+import {AirplanesEnum} from '../enums/airplanes.enum';
 
 export const AIRPLANES_DATA: Array<AirplaneType> = [
   {
-    airplaneName: 'Су-27',
+    airplaneName: AirplanesEnum.su27,
     airplaneControlName: 'su27',
     outfitGroups: [
       {
@@ -46,7 +47,7 @@ export const AIRPLANES_DATA: Array<AirplaneType> = [
     ],
   },
   {
-    airplaneName: 'МиГ-29',
+    airplaneName: AirplanesEnum.mig29,
     airplaneControlName: 'mig29',
     outfitGroups: [
       {
@@ -82,7 +83,7 @@ export const AIRPLANES_DATA: Array<AirplaneType> = [
     ],
   },
   {
-    airplaneName: 'Су-25',
+    airplaneName: AirplanesEnum.su25,
     airplaneControlName: 'su25',
     outfitGroups: [
       {
@@ -125,7 +126,7 @@ export const AIRPLANES_DATA: Array<AirplaneType> = [
     ],
   },
   {
-    airplaneName: 'Су-24М',
+    airplaneName: AirplanesEnum.su24m,
     airplaneControlName: 'su24m',
     outfitGroups: [
       {
@@ -175,7 +176,7 @@ export const AIRPLANES_DATA: Array<AirplaneType> = [
     ],
   },
   {
-    airplaneName: 'Мi-24П',
+    airplaneName: AirplanesEnum.mi24p,
     airplaneControlName: 'mi24p',
     outfitGroups: [
       {
@@ -202,7 +203,7 @@ export const AIRPLANES_DATA: Array<AirplaneType> = [
     ],
   },
   {
-    airplaneName: 'Мi-8МТ',
+    airplaneName: AirplanesEnum.mi8mt,
     airplaneControlName: 'mi8mt',
     outfitGroups: [
       {
@@ -222,7 +223,7 @@ export const AIRPLANES_DATA: Array<AirplaneType> = [
     ],
   },
   {
-    airplaneName: 'Ка-27пч',
+    airplaneName: AirplanesEnum.ka27pch,
     airplaneControlName: 'ka27pch',
     outfitGroups: [
       {
@@ -235,7 +236,7 @@ export const AIRPLANES_DATA: Array<AirplaneType> = [
     ],
   },
   {
-    airplaneName: 'Ка-29',
+    airplaneName: AirplanesEnum.ka29,
     airplaneControlName: 'ka-29',
     outfitGroups: [
       {
