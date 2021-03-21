@@ -175,6 +175,15 @@ export class ResultsComponent implements OnInit, OnDestroy {
         xAxis: {
           categories: ['КАМАЗ', 'Умовний вагон', 'Іл-76', 'Ан-26'],
         },
+        plotOptions: {
+          column: {
+            colorByPoint: false,
+          },
+        },
+        colors: [
+          '#e7c65e',
+          '#53c5e3',
+        ],
         yAxis: {
           allowDecimals: false,
           title: {
