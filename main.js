@@ -4,7 +4,7 @@ let win;
 
 function createWindow() {
   win = new BrowserWindow({
-    width: 900,
+    width: 1200,
     height: 900,
     minHeight: 900,
     minWidth: 1200,

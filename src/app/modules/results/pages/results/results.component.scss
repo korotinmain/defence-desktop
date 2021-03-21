@@ -1,11 +1,34 @@
 :host {
   .results-container {
+
+    .header-text {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 18px;
+    }
+
     .toggles {
+      margin-top: 20px;
       width: 100%;
       padding: 20px;
       display: flex;
       justify-content: center;
       align-items: center;
+    }
+
+    .charts {
+      display: grid;
+      grid-gap: 20px;
+      grid-template-columns: 500px 500px;
+      justify-content: center;
+      align-items: center;
+
+      > div {
+        width: 500px;
+      }
     }
 
     .content {

@@ -1,13 +1,17 @@
 <div class="results-container">
+  <div class="added-airplanes">
+    <div class="airplane">
+      Cу-27
+    </div>
+  </div>
+  <!--  <div class="added-airplanes" *ngIf="(addedAirplanes$ | async) as addedAirplanes">-->
+  <!--    <div class="airplane" *ngFor="let airplane of addedAirplanes">-->
+  <!--      {{airplane.airplaneName}}-->
+  <!--    </div>-->
+  <!--  </div>-->
   <div class="header-text">
     <p>Кількість літаків, що приймають участь в операції: {{selectedAirplane?.result.flyingResource}}</p>
   </div>
-<!--  <div class="toggles">-->
-<!--    <mat-button-toggle-group name="airplanes" aria-label="Airplanes">-->
-<!--      <mat-button-toggle *ngFor="let airplane of addedAirplanes"-->
-<!--                         [value]="airplane.airplaneName.toLowerCase()">{{airplane.airplaneName}}</mat-button-toggle>-->
-<!--    </mat-button-toggle-group>-->
-<!--  </div>-->
   <div class="content">
     <div class="grid-container header">
       <div class="grid-item a">
@@ -89,23 +93,29 @@
         <div class="info" *ngFor="let module of resource.modules">
           <div class="column">{{module.type}}</div>
           <div class="column">{{module.count}}</div>
-          <div class="column">1</div>
-          <div class="column">1</div>
-          <div class="column">1</div>
-          <div class="column">1</div>
+          <div class="column">{{getWeight(module.type)}}</div>
+          <div class="column">{{getCapacity(module.type)}}</div>
+          <div
+            class="column">{{getAmmunitionRequirement(module.type, resource.flyingResource)}}</div>
+          <div class="column">{{getRate(module.type).ammunitionRequirement}}</div>
           <div class="column">{{module.value}}</div>
-          <div class="column">1</div>
-          <div class="column">1</div>
-          <div class="column">1</div>
-          <div class="column">1</div>
-          <div class="column">1</div>
-          <div class="column">1</div>
-          <div class="column">1</div>
-          <div class="column">1</div>
-          <div class="column">1</div>
-          <div class="column">1</div>
+          <div class="column">{{getEstimatedNeed(module, resource.flyingResource)}}</div>
+          <div class="column">{{getNeedToGiveRide(module, resource.flyingResource)}}</div>
+          <div class="column">{{getTypeRequirementsWeight(module, resource.flyingResource, 8)}}</div>
+          <div class="column">{{getTypeRequirementsCapacity(module, resource.flyingResource, 10)}}</div>
+          <div class="column">{{getTypeRequirementsWeight(module, resource.flyingResource, 29)}}</div>
+          <div class="column">{{getTypeRequirementsCapacity(module, resource.flyingResource, 98)}}</div>
+          <div class="column">{{getTypeRequirementsWeight(module, resource.flyingResource, 40)}}</div>
+          <div class="column">{{getTypeRequirementsCapacity(module, resource.flyingResource, 234.6)}}</div>
+          <div class="column">{{getTypeRequirementsWeight(module, resource.flyingResource, 5.5)}}</div>
+          <div class="column">{{getTypeRequirementsCapacity(module, resource.flyingResource, 45.7)}}</div>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="charts" *ngIf="chartsData.length">
+    <div *ngFor="let chart of chartsData; i as index">
+      <highcharts-chart class="chart" [Highcharts]="Highcharts" [options]="chart"></highcharts-chart>
     </div>
   </div>
 </div>
