@@ -27,7 +27,7 @@ export class ResultsComponent implements OnInit {
 
   Highcharts: typeof Highcharts = Highcharts;
   addedAirplanes$: Observable<Array<AddedAirplaneType>>;
-  selectedAirplane: any = null;
+  selectedAirplane: AddedAirplaneType = null;
   parsedModulesData: Array<ResourceType> = [];
   chartsData: Array<any> = [];
 
@@ -36,44 +36,23 @@ export class ResultsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.addedAirplanes$ = this.addedAirplanesService.addedAirplanes$;
     this.addedAirplanesService.addedAirplanes$
       .subscribe(response => {
-        console.log(response);
         if (response.length) {
           this.selectedAirplane = response[0];
           this.parseModules(response[0]);
           this.cdr.detectChanges();
         }
       });
-    const data = {
-      airplaneName: 'Су-27',
-      result: {
-        airAir: {
-          control_0: {type: 'P-27T', value: 5421, count: 3},
-          control_1: {type: 'P-27P', value: 274, count: 4},
-          control_2: {type: 'P-27EP', value: 343, count: 5},
-        },
-        airGround: {
-          control_0: {type: 'P-27T', value: 5421, count: 3},
-          control_1: {type: 'P-27P', value: 274, count: 4},
-          control_2: {type: 'P-27EP', value: 343, count: 5},
-        },
-        adjustedAviationBombs: {
-          control_0: {type: 'P-27T', value: 5421, count: 3},
-          control_1: {type: 'P-27P', value: 274, count: 4},
-          control_2: {type: 'P-27EP', value: 343, count: 5},
-        },
-        uncorrectedAviationRockets: {
-          control_0: {type: 'P-27T', value: 5421, count: 3},
-          control_1: {type: 'P-27P', value: 274, count: 4},
-          control_2: {type: 'P-27EP', value: 343, count: 5},
-        },
-        firstFlying: 12,
-        flyingResource: 24,
-      },
-    };
-    this.selectedAirplane = data;
-    this.parseModules(data);
+  }
+
+  changeAirplane(airplane: AddedAirplaneType): void {
+    if (this.selectedAirplane.airplaneName !== airplane.airplaneName) {
+      this.selectedAirplane = airplane;
+      this.parseModules(airplane);
+      this.cdr.detectChanges();
+    }
   }
 
   getResourceName(resource: string): string {
@@ -149,7 +128,7 @@ export class ResultsComponent implements OnInit {
   }
 
   private parseCharts(result: Array<ResourceType>): void {
-    const data = result.map((resource: ResourceType) => {
+    const data: Array<ChartType> = result.map((resource: ResourceType) => {
       return {
         resourceName: resource.resourceType,
         data: [{
@@ -175,7 +154,7 @@ export class ResultsComponent implements OnInit {
         ],
       };
     });
-    this.chartsData = data.map((resource, index) => {
+    this.chartsData = data.map((resource) => {
       return {
         chart: {
           type: 'column',
@@ -193,12 +172,12 @@ export class ResultsComponent implements OnInit {
         },
         series: [
           {
-            name: 'маса',
+            name: 'по масі, т.',
             type: 'column',
             data: resource.data.map(res => Number(res.weight)),
           },
           {
-            name: 'обьем',
+            name: 'по об’єму, м.куб',
             type: 'column',
             data: resource.data.map(res => Number(res.capacity)),
           },

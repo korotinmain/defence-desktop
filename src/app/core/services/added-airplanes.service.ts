@@ -20,7 +20,7 @@ export class AddedAirplanesService {
     this._addedAirplanesSubject$.next(this._addedAirplanes);
   }
 
-  removeAirplane(airplane: AirplaneType): void {
+  removeAirplane(airplane: AddedAirplaneType): void {
     this._addedAirplanes = this._addedAirplanes.filter(value => value.airplaneName !== airplane.airplaneName);
     this._addedAirplanesSubject$.next(this._addedAirplanes);
   }

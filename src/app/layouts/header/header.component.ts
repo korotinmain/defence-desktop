@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit {
     this.addedAirplanes$ = this.addedAirplanesService.addedAirplanes$;
   }
 
-  removeAirplane(airplane: AirplaneType): void {
+  removeAirplane(airplane: AddedAirplaneType): void {
     this.dialog.open(RemoveAirplaneDialogComponent, {panelClass: 'remove-airplane-dialog-container'})
       .afterClosed()
       .subscribe((response) => {

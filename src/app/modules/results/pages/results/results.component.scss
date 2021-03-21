@@ -1,5 +1,55 @@
+@import "src/assets/styles/colors";
+
 :host {
   .results-container {
+    position: relative;
+
+    .back-button {
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      background: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      left: 15px;
+      top: 5px;
+      cursor: pointer;
+      outline: none;
+
+      svg {
+        width: 22px;
+
+        path {
+          fill: $bg-color;
+        }
+      }
+    }
+
+    .added-airplanes {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+
+      .airplane {
+        padding: 10px;
+        border: 1px solid white;
+        border-right: none;
+        color: white;
+        cursor: pointer;
+
+        &:last-child {
+          border-right: 1px solid white;
+        }
+
+        &.active, &:hover {
+          background: white;
+          color: $bg-color;
+        }
+      }
+    }
 
     .header-text {
       width: 100%;

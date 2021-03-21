@@ -1,11 +1,11 @@
 <header class="main-header">
   <h1>Defence</h1>
-  <div class="added-airplanes">
-    <div class="airplane" *ngFor="let airplane of addedAirplanes$ | async">
+  <div class="added-airplanes" *ngIf="(addedAirplanes$ | async) as addedAirplanes">
+    <div class="airplane" *ngFor="let airplane of addedAirplanes">
       <div class="remove-airplane" (click)="removeAirplane(airplane)">x</div>
       {{airplane.airplaneName}}
     </div>
-    <div class="separator" *ngIf="airplanesLength"></div>
-    <button class="btn calculate" (click)="onCalculateClick()">Розрахувати</button>
+    <div class="separator" *ngIf="addedAirplanes.length"></div>
+    <button class="btn calculate" *ngIf="addedAirplanes.length" (click)="onCalculateClick()">Розрахувати</button>
   </div>
 </header>
