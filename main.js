@@ -5,8 +5,8 @@ let win;
 function createWindow() {
   win = new BrowserWindow({
     width: 1200,
-    height: 900,
-    minHeight: 900,
+    height: 600,
+    minHeight: 600,
     minWidth: 1200,
     maxWidth: 1200,
     backgroundColor: '#09121d',

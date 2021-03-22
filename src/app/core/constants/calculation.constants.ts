@@ -1,13 +1,8 @@
 import {AirplaneType} from '../types/airplane.type';
-import {
-  ADJUSTED_AVIATION_BOMBS_VALUES,
-  AIR_AIR_FIRST_VALUES,
-  AIR_AIR_SECOND_VALUES,
-  AIR_AIR_THIRD_VALUES,
-  AIR_GROUND_VALUES, AVIATION_AMMUNITION_VALUES, AVIATION_BOMBS_VALUES, UNCORRECTED_AVIATION_ROCKETS_VALUES,
-} from './outfit-values.constant';
+import {AVIATION_BOMBS_VALUES, UNCORRECTED_AVIATION_ROCKETS_VALUES} from './outfit-values.constant';
 import {GroupNameEnum} from '../enums/group-name.enum';
 import {AirplanesEnum} from '../enums/airplanes.enum';
+import {ModulesEnum} from '../enums/modules.enum';
 
 export const AIRPLANES_DATA: Array<AirplaneType> = [
   {
@@ -18,30 +13,23 @@ export const AIRPLANES_DATA: Array<AirplaneType> = [
         groupName: 'КАР класу \'повітря-повітря\'. од.',
         groupControlName: GroupNameEnum.air_air,
         outfits: [
-          {control: 'control_0', values: AIR_AIR_FIRST_VALUES},
-          {control: 'control_1', values: AIR_AIR_SECOND_VALUES},
-          {control: 'control_2', values: AIR_AIR_THIRD_VALUES},
+          {control: 'control_0', values: [ModulesEnum.r27r, ModulesEnum.r27er]},
+          {control: 'control_1', values: [ModulesEnum.r27et]},
+          {control: 'control_2', values: [ModulesEnum.r73kl]},
         ],
       },
       {
         groupName: 'Некеровані авіаційні ракети',
         groupControlName: GroupNameEnum.uncorrected_aviation_rockets,
         outfits: [
-          {control: 'control_0', values: UNCORRECTED_AVIATION_ROCKETS_VALUES},
-        ],
-      },
-      {
-        groupName: 'Авіаційні бомби, од.',
-        groupControlName: GroupNameEnum.aviation_bombs,
-        outfits: [
-          {control: 'control_0', values: AVIATION_BOMBS_VALUES},
+          {control: 'control_0', values: [ModulesEnum.c8kom, ModulesEnum.c13, ModulesEnum.c24b]},
         ],
       },
       {
         groupName: 'Авіаційні набої',
         groupControlName: GroupNameEnum.aviation_ammunition,
         outfits: [
-          {control: 'control_0', values: AVIATION_AMMUNITION_VALUES},
+          {control: 'control_0', values: [ModulesEnum.mm30]},
         ],
       },
     ],
@@ -54,30 +42,22 @@ export const AIRPLANES_DATA: Array<AirplaneType> = [
         groupName: 'КАР класу \'повітря-повітря\'. од.',
         groupControlName: GroupNameEnum.air_air,
         outfits: [
-          {control: 'control_0', values: AIR_AIR_FIRST_VALUES},
-          {control: 'control_1', values: AIR_AIR_SECOND_VALUES},
-          {control: 'control_2', values: AIR_AIR_THIRD_VALUES},
+          {control: 'control_0', values: [ModulesEnum.r27r]},
+          {control: 'control_1', values: [ModulesEnum.r73kl]},
         ],
       },
       {
         groupName: 'Некеровані авіаційні ракети',
         groupControlName: GroupNameEnum.uncorrected_aviation_rockets,
         outfits: [
-          {control: 'control_0', values: UNCORRECTED_AVIATION_ROCKETS_VALUES},
-        ],
-      },
-      {
-        groupName: 'Авіаційні бомби, од.',
-        groupControlName: GroupNameEnum.aviation_bombs,
-        outfits: [
-          {control: 'control_0', values: AVIATION_BOMBS_VALUES},
+          {control: 'control_0', values: [ModulesEnum.c8kom, ModulesEnum.c13, ModulesEnum.c24b]},
         ],
       },
       {
         groupName: 'Авіаційні набої',
         groupControlName: GroupNameEnum.aviation_ammunition,
         outfits: [
-          {control: 'control_0', values: AVIATION_AMMUNITION_VALUES},
+          {control: 'control_0', values: [ModulesEnum.mm30]},
         ],
       },
     ],
@@ -90,37 +70,40 @@ export const AIRPLANES_DATA: Array<AirplaneType> = [
         groupName: 'КАР класу \'повітря-повітря\'. од.',
         groupControlName: GroupNameEnum.air_air,
         outfits: [
-          {control: 'control_0', values: AIR_AIR_FIRST_VALUES},
-          {control: 'control_1', values: AIR_AIR_SECOND_VALUES},
-          {control: 'control_2', values: AIR_AIR_THIRD_VALUES},
+          {control: 'control_0', values: [ModulesEnum.r60m]},
         ],
       },
       {
         groupName: 'КАР класу \'повітря-поверхня\'. од.',
         groupControlName: GroupNameEnum.air_ground,
         outfits: [
-          {control: 'control_0', values: AIR_GROUND_VALUES},
+          {control: 'control_0', values: [ModulesEnum.x25mp, ModulesEnum.x29l]},
         ],
       },
       {
         groupName: 'Некеровані авіаційні ракети',
         groupControlName: GroupNameEnum.uncorrected_aviation_rockets,
         outfits: [
-          {control: 'control_0', values: UNCORRECTED_AVIATION_ROCKETS_VALUES},
+          {control: 'control_0', values: [ModulesEnum.c8kom, ModulesEnum.c13, ModulesEnum.c25ofmpu]},
         ],
       },
       {
         groupName: 'Авіаційні бомби, од.',
         groupControlName: GroupNameEnum.aviation_bombs,
         outfits: [
-          {control: 'control_0', values: AVIATION_BOMBS_VALUES},
+          {
+            control: 'control_0', values: [
+              ModulesEnum.fab500m54, ModulesEnum.fab500m62, ModulesEnum.fab250m54, ModulesEnum.fab250m62, ModulesEnum.ofab250270,
+              ModulesEnum.rbk500shoab05, ModulesEnum.rbk500ptab1, ModulesEnum.rbk250shoab, ModulesEnum.zab500sh,
+            ],
+          },
         ],
       },
       {
         groupName: 'Авіаційні набої',
         groupControlName: GroupNameEnum.aviation_ammunition,
         outfits: [
-          {control: 'control_0', values: AVIATION_AMMUNITION_VALUES},
+          {control: 'control_0', values: [ModulesEnum.mm30]},
         ],
       },
     ],
@@ -133,44 +116,47 @@ export const AIRPLANES_DATA: Array<AirplaneType> = [
         groupName: 'КАР класу \'повітря-повітря\'. од.',
         groupControlName: GroupNameEnum.air_air,
         outfits: [
-          {control: 'control_0', values: AIR_AIR_FIRST_VALUES},
-          {control: 'control_1', values: AIR_AIR_SECOND_VALUES},
-          {control: 'control_2', values: AIR_AIR_THIRD_VALUES},
+          {control: 'control_0', values: [ModulesEnum.r60m]},
         ],
       },
       {
         groupName: 'КАР класу \'повітря-поверхня\'. од.',
         groupControlName: GroupNameEnum.air_ground,
         outfits: [
-          {control: 'control_0', values: AIR_GROUND_VALUES},
+          {control: 'control_0', values: [ModulesEnum.x25mp, ModulesEnum.x29l, ModulesEnum.x58u]},
         ],
       },
       {
         groupName: 'Кориговані  авіаційні  бомби,  од.',
         groupControlName: GroupNameEnum.adjusted_aviation_bombs,
         outfits: [
-          {control: 'control_0', values: ADJUSTED_AVIATION_BOMBS_VALUES},
+          {control: 'control_0', values: [ModulesEnum.kab500l, ModulesEnum.kab1500lpr]},
         ],
       },
       {
         groupName: 'Авіаційні бомби, од.',
         groupControlName: GroupNameEnum.aviation_bombs,
         outfits: [
-          {control: 'control_0', values: AVIATION_BOMBS_VALUES},
+          {
+            control: 'control_0',
+            values: [ModulesEnum.fab500m54, ModulesEnum.fab500m62, ModulesEnum.fab500t,
+              ModulesEnum.fab250m54, ModulesEnum.fab250m62, ModulesEnum.ofab250270, ModulesEnum.rbk500shoab05,
+              ModulesEnum.rbk500ptab1, ModulesEnum.rbk250shoab, ModulesEnum.zab500sh],
+          },
         ],
       },
       {
         groupName: 'Некеровані авіаційні ракети',
         groupControlName: GroupNameEnum.uncorrected_aviation_rockets,
         outfits: [
-          {control: 'control_0', values: UNCORRECTED_AVIATION_ROCKETS_VALUES},
+          {control: 'control_0', values: [ModulesEnum.c8kom, ModulesEnum.c13, ModulesEnum.c24b, ModulesEnum.c25ofmpu]},
         ],
       },
       {
         groupName: 'Авіаційні набої',
         groupControlName: GroupNameEnum.aviation_ammunition,
         outfits: [
-          {control: 'control_0', values: AVIATION_AMMUNITION_VALUES},
+          {control: 'control_0', values: [ModulesEnum.mm23]},
         ],
       },
     ],
@@ -183,21 +169,24 @@ export const AIRPLANES_DATA: Array<AirplaneType> = [
         groupName: 'Некеровані авіаційні ракети',
         groupControlName: GroupNameEnum.uncorrected_aviation_rockets,
         outfits: [
-          {control: 'control_0', values: UNCORRECTED_AVIATION_ROCKETS_VALUES},
+          {control: 'control_0', values: [ModulesEnum.c8kom, ModulesEnum.c13]},
         ],
       },
       {
         groupName: 'Авіаційні бомби, од.',
         groupControlName: GroupNameEnum.aviation_bombs,
         outfits: [
-          {control: 'control_0', values: AVIATION_BOMBS_VALUES},
+          {
+            control: 'control_0', values: [ModulesEnum.fab250m54, ModulesEnum.fab250m62, ModulesEnum.ofab250270, ModulesEnum.ofab100120,
+              ModulesEnum.rbk250shoab, ModulesEnum.rbk500shoab05],
+          },
         ],
       },
       {
         groupName: 'Авіаційні набої',
         groupControlName: GroupNameEnum.aviation_ammunition,
         outfits: [
-          {control: 'control_0', values: AVIATION_AMMUNITION_VALUES},
+          {control: 'control_0', values: [ModulesEnum.mm30]},
         ],
       },
     ],
@@ -210,14 +199,17 @@ export const AIRPLANES_DATA: Array<AirplaneType> = [
         groupName: 'Некеровані авіаційні ракети',
         groupControlName: GroupNameEnum.uncorrected_aviation_rockets,
         outfits: [
-          {control: 'control_0', values: UNCORRECTED_AVIATION_ROCKETS_VALUES},
+          {control: 'control_0', values: [ModulesEnum.c8kom]},
         ],
       },
       {
         groupName: 'Авіаційні бомби, од.',
         groupControlName: GroupNameEnum.aviation_bombs,
         outfits: [
-          {control: 'control_0', values: AVIATION_BOMBS_VALUES},
+          {
+            control: 'control_0',
+            values: [ModulesEnum.fab250m54, ModulesEnum.fab250m62, ModulesEnum.ofab100120, ModulesEnum.ofab250270, ModulesEnum.rbk250shoab],
+          },
         ],
       },
     ],
@@ -230,7 +222,7 @@ export const AIRPLANES_DATA: Array<AirplaneType> = [
         groupName: 'Авіаційні бомби, од.',
         groupControlName: GroupNameEnum.aviation_bombs,
         outfits: [
-          {control: 'control_0', values: AVIATION_BOMBS_VALUES},
+          {control: 'control_0', values: [ModulesEnum.fab250m54, ModulesEnum.fab250m62]},
         ],
       },
     ],
@@ -243,21 +235,21 @@ export const AIRPLANES_DATA: Array<AirplaneType> = [
         groupName: 'Некеровані авіаційні ракети',
         groupControlName: GroupNameEnum.uncorrected_aviation_rockets,
         outfits: [
-          {control: 'control_0', values: UNCORRECTED_AVIATION_ROCKETS_VALUES},
+          {control: 'control_0', values: [ModulesEnum.c8kom]},
         ],
       },
       {
         groupName: 'Авіаційні бомби, од.',
         groupControlName: GroupNameEnum.aviation_bombs,
         outfits: [
-          {control: 'control_0', values: AVIATION_BOMBS_VALUES},
+          {control: 'control_0', values: [ModulesEnum.ofab100120]},
         ],
       },
       {
         groupName: 'Авіаційні набої',
         groupControlName: GroupNameEnum.aviation_ammunition,
         outfits: [
-          {control: 'control_0', values: AVIATION_AMMUNITION_VALUES},
+          {control: 'control_0', values: [ModulesEnum.mm30]},
         ],
       },
     ],
