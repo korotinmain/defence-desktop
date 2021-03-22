@@ -29,7 +29,7 @@ export type ChartType = {
 export class ResultsComponent implements OnInit, OnDestroy {
 
   Highcharts: typeof Highcharts = Highcharts;
-  addedAirplanes$: Observable<Array<AddedAirplaneType>>;
+  addedAirplanes: Array<AddedAirplaneType> = [];
   selectedAirplane: AddedAirplaneType = null;
   parsedModulesData: Array<ResourceType> = [];
   chartsData: Array<any> = [];
@@ -40,26 +40,42 @@ export class ResultsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.addedAirplanes$ = this.addedAirplanesService.addedAirplanes$;
     this.addedAirplanesService.addedAirplanes$
       .pipe(
         takeUntil(this._ngUnsubscribe),
       )
       .subscribe(response => {
-        if (response.length) {
-          this.selectedAirplane = response[0];
-          this.parseModules(response[0]);
-          if (!this.cdr['destroyed']) {
-            this.cdr.detectChanges();
-          }
-        }
+        this.addedAirplanes = response;
+        this.parseSubscribedData(response);
+        this.cdr.detectChanges();
       });
+  }
+
+  private parseSubscribedData(response: Array<AddedAirplaneType>): void {
+    if (response.length) {
+      this.selectedAirplane = response[0];
+      this.parsedModulesData = this.parseModules(response[0]);
+      this.parseCharts(this.parseModules(response[0]));
+      this.cdr.detectChanges();
+    }
+  }
+
+  selectGroupingType(): void {
+    this.selectedAirplane = {
+      airplaneName: 'Угруповання', result: {
+        flyingResource: this.addedAirplanes.reduce((acc, curr) => (acc + Number(curr.result.flyingResource)), 0),
+      },
+    };
+    this.parsedModulesData = this.parseGroupingData(this.addedAirplanes);
+    this.parseCharts(this.parseGroupingData(this.addedAirplanes));
+    this.cdr.detectChanges();
   }
 
   changeAirplane(airplane: AddedAirplaneType): void {
     if (this.selectedAirplane.airplaneName !== airplane.airplaneName) {
       this.selectedAirplane = airplane;
-      this.parseModules(airplane);
+      this.parsedModulesData = this.parseModules(airplane);
+      this.parseCharts(this.parseModules(airplane));
       this.cdr.detectChanges();
     }
   }
@@ -82,39 +98,40 @@ export class ResultsComponent implements OnInit, OnDestroy {
     return LOADING_RATES;
   }
 
-  getAmmunitionRequirement(type: string, LAcount: number, airplane: string): number {
+  getAmmunitionRequirement(type: string, LAcount: number, coefficient: number): number {
     const foundType = this.loadingRate.find(rate => rate.type === type);
     const count = !!foundType ? foundType.count : 1;
-    return LAcount * count * this.getAmmunitionRequirementCoefficient(type, airplane);
+    return LAcount * count * coefficient;
   }
 
-  getEstimatedNeed(module: ModuleType, resource: number, airplane: string): string {
-    return (module.value / (this.getAmmunitionRequirement(module.type, resource, airplane) / this.getAmmunitionRequirementCoefficient(module.type, airplane))).toFixed(1) || '0';
+  getEstimatedNeed(module: ModuleType, resource: number, coefficient: number): string {
+    return (module.value / (this.getAmmunitionRequirement(module.type, resource, coefficient) / coefficient)).toFixed(1) || '0';
   }
 
-  getNeedToGiveRide(module: ModuleType, resource: number, airplane: string): string {
-    const ammunitionRequirement = this.getAmmunitionRequirement(module.type, resource, airplane);
+  getNeedToGiveRide(module: ModuleType, resource: number, coefficient: number): string {
+    const ammunitionRequirement = this.getAmmunitionRequirement(module.type, resource, coefficient);
     const calculation = (module.value - ammunitionRequirement) + (ammunitionRequirement * 0.7);
     return calculation < 0 ? '0' : calculation.toFixed(1);
   }
 
-  getTypeRequirementsWeight(module: ModuleType, resource: number, divide: number, airplane: string): string {
+  getTypeRequirementsWeight(module: ModuleType, resource: number, divide: number, coefficient: number): string {
     const foundType = this.loadingRate.find(rate => rate.type === module.type);
-    return !!foundType ? (((foundType.weight / 1000) * Number(this.getNeedToGiveRide(module, resource, airplane))) / divide).toFixed(1) : '0';
+    return !!foundType ? (((foundType.weight / 1000) * Number(this.getNeedToGiveRide(module, resource, coefficient))) / divide).toFixed(1) : '0';
   }
 
-  getTypeRequirementsCapacity(module: ModuleType, resource: number, divide: number, airplane: string): string {
+  getTypeRequirementsCapacity(module: ModuleType, resource: number, divide: number, coefficient: number): string {
     const foundType = this.loadingRate.find(rate => rate.type === module.type);
-    return !!foundType ? ((foundType.capacity * Number(this.getNeedToGiveRide(module, resource, airplane))) / divide).toFixed(1) : '0';
+    return !!foundType ? ((foundType.capacity * Number(this.getNeedToGiveRide(module, resource, coefficient))) / divide).toFixed(1) : '0';
   }
 
-  parseModules(data: any): void {
+  parseModules(data: any): Array<ResourceType> {
     const result = [];
     Object.keys(data.result).forEach((resourceKey) => {
       const modules = [];
       if (resourceKey !== 'firstFlying' && resourceKey !== 'flyingResource') {
         Object.keys(data.result[resourceKey]).forEach((moduleKey) => {
           if (moduleKey !== 'firstFlying' && moduleKey !== 'flyingResource') {
+            data.result[resourceKey][moduleKey].coefficient = this.getAmmunitionRequirementCoefficient(data.result[resourceKey][moduleKey].type, data.airplaneName);
             modules.push(data.result[resourceKey][moduleKey]);
           }
         });
@@ -128,11 +145,7 @@ export class ResultsComponent implements OnInit, OnDestroy {
         result.push(resource);
       }
     });
-    this.parsedModulesData = result;
-    this.parseCharts(result);
-    if (!this.cdr['destroyed']) {
-      this.cdr.detectChanges();
-    }
+    return result;
   }
 
   private parseCharts(result: Array<ResourceType>): void {
@@ -141,23 +154,23 @@ export class ResultsComponent implements OnInit, OnDestroy {
         resourceName: resource.resourceType,
         data: [{
           type: 'КАМАЗ',
-          weight: this.getTotalRequirementsWeight(resource, 8, resource.airplaneName),
-          capacity: this.getTotalRequirementsCapacity(resource, 10, resource.airplaneName),
+          weight: this.getTotalRequirementsWeight(resource, 8),
+          capacity: this.getTotalRequirementsCapacity(resource, 10),
         },
           {
             type: 'Умовний вагон',
-            weight: this.getTotalRequirementsWeight(resource, 29, resource.airplaneName),
-            capacity: this.getTotalRequirementsCapacity(resource, 98, resource.airplaneName),
+            weight: this.getTotalRequirementsWeight(resource, 29),
+            capacity: this.getTotalRequirementsCapacity(resource, 98),
           },
           {
             type: 'Іл-76',
-            weight: this.getTotalRequirementsWeight(resource, 40, resource.airplaneName),
-            capacity: this.getTotalRequirementsCapacity(resource, 234.6, resource.airplaneName),
+            weight: this.getTotalRequirementsWeight(resource, 40),
+            capacity: this.getTotalRequirementsCapacity(resource, 234.6),
           },
           {
             type: 'Ан-26',
-            weight: this.getTotalRequirementsWeight(resource, 5.5, resource.airplaneName),
-            capacity: this.getTotalRequirementsCapacity(resource, 45.7, resource.airplaneName),
+            weight: this.getTotalRequirementsWeight(resource, 5.5),
+            capacity: this.getTotalRequirementsCapacity(resource, 45.7),
           },
         ],
       };
@@ -222,14 +235,63 @@ export class ResultsComponent implements OnInit, OnDestroy {
     return !!foundModule ? foundModule.coefficient : 0;
   }
 
-  getTotalRequirementsWeight(resource: ResourceType, divide: number, airplane: string): string {
-    return resource.modules
-      .reduce((acc, curr) => acc + Number(this.getTypeRequirementsWeight(curr, resource.flyingResource, divide, airplane)), 0).toFixed(1);
+  private parseGroupingData(data: Array<AddedAirplaneType>): Array<ResourceType> {
+    const groups = [];
+    const parsedAirplanesModules = data.map(airplane => this.parseModules(airplane));
+    const concatArrays = [].concat.apply([], parsedAirplanesModules);
+    concatArrays.forEach(resource => {
+      const foundResource = groups.find(source => source.resourceType === resource.resourceType);
+      if (!!foundResource) {
+        const resourceIndex = groups.indexOf(foundResource);
+        const modules = [].concat.apply(groups[resourceIndex].modules, resource.modules);
+        const groupedModules = [];
+        modules.forEach(module => {
+          const foundModule = groupedModules.find(moduleItem => moduleItem.type === module.type);
+          if (!!foundModule) {
+            const moduleIndex = groupedModules.indexOf(foundModule);
+            groupedModules[moduleIndex] = {
+              type: groupedModules[moduleIndex].type,
+              value: groupedModules[moduleIndex].value + module.value,
+              count: groupedModules[moduleIndex].count + module.count,
+              coefficient: groupedModules[moduleIndex].coefficient + module.coefficient,
+            };
+          } else {
+            groupedModules.push({
+              type: module.type,
+              value: module.value,
+              count: module.count,
+              coefficient: module.coefficient,
+            });
+          }
+        });
+        groups[resourceIndex] = {
+          airplaneName: 'Угруповання',
+          resourceType: groups[resourceIndex].resourceType,
+          flyingResource: groups[resourceIndex].flyingResource + resource.flyingResource,
+          firstFlying: groups[resourceIndex].firstFlying + resource.firstFlying,
+          modules: groupedModules,
+        };
+      } else {
+        groups.push({
+          airplaneName: 'Угруповання',
+          resourceType: resource.resourceType,
+          flyingResource: resource.flyingResource,
+          firstFlying: resource.firstFlying,
+          modules: resource.modules,
+        });
+      }
+    });
+    return groups;
   }
 
-  getTotalRequirementsCapacity(resource: ResourceType, divide: number, airplane: string): string {
+  getTotalRequirementsWeight(resource: ResourceType, divide: number): string {
     return resource.modules
-      .reduce((acc, curr) => acc + Number(this.getTypeRequirementsCapacity(curr, resource.flyingResource, divide, airplane)), 0).toFixed(1);
+      .reduce((acc, curr) => acc + Number(this.getTypeRequirementsWeight(curr, resource.flyingResource, divide, curr.coefficient)), 0).toFixed(1);
+  }
+
+  getTotalRequirementsCapacity(resource: ResourceType, divide: number): string {
+    return resource.modules
+      .reduce((acc, curr) => acc + Number(this.getTypeRequirementsCapacity(curr, resource.flyingResource, divide, curr.coefficient)), 0).toFixed(1);
   }
 
   ngOnDestroy(): void {

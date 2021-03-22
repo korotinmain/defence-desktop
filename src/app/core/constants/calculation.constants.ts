@@ -1,5 +1,4 @@
 import {AirplaneType} from '../types/airplane.type';
-import {AVIATION_BOMBS_VALUES, UNCORRECTED_AVIATION_ROCKETS_VALUES} from './outfit-values.constant';
 import {GroupNameEnum} from '../enums/group-name.enum';
 import {AirplanesEnum} from '../enums/airplanes.enum';
 import {ModulesEnum} from '../enums/modules.enum';

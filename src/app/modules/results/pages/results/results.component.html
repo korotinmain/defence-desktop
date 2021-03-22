@@ -17,12 +17,17 @@
       <g></g>
       <g></g></svg>
   </div>
-  <div class="added-airplanes" *ngIf="(addedAirplanes$ | async) as addedAirplanes">
+  <div class="added-airplanes" *ngIf="addedAirplanes.length">
     <div class="airplane"
          (click)="changeAirplane(airplane)"
          [class.active]="selectedAirplane.airplaneName === airplane.airplaneName"
          *ngFor="let airplane of addedAirplanes">
       {{airplane.airplaneName}}
+    </div>
+    <div class="airplane" *ngIf="addedAirplanes.length > 1"
+         (click)="selectGroupingType()"
+         [class.active]="selectedAirplane.airplaneName === 'Угруповання'">
+      Угруповання
     </div>
   </div>
   <div class="header-text">
@@ -112,27 +117,27 @@
           <div class="column">{{getWeight(module.type)}}</div>
           <div class="column">{{getCapacity(module.type)}}</div>
           <div
-            class="column">{{getAmmunitionRequirement(module.type, resource.flyingResource, resource.airplaneName)}}</div>
-          <div class="column">{{getAmmunitionRequirementCoefficient(module.type, resource.airplaneName)}}</div>
+            class="column">{{getAmmunitionRequirement(module.type, resource.flyingResource, module.coefficient)}}</div>
+          <div class="column">{{module.coefficient}}</div>
           <div class="column">{{module.value}}</div>
-          <div class="column yellow">{{getEstimatedNeed(module, resource.flyingResource, resource.airplaneName)}}</div>
-          <div class="column green">{{getNeedToGiveRide(module, resource.flyingResource, resource.airplaneName)}}</div>
+          <div class="column yellow">{{getEstimatedNeed(module, resource.flyingResource, module.coefficient)}}</div>
+          <div class="column green">{{getNeedToGiveRide(module, resource.flyingResource, module.coefficient)}}</div>
           <div
-            class="column light">{{getTypeRequirementsWeight(module, resource.flyingResource, 8, resource.airplaneName)}}</div>
+            class="column light">{{getTypeRequirementsWeight(module, resource.flyingResource, 8, module.coefficient)}}</div>
           <div
-            class="column dark">{{getTypeRequirementsCapacity(module, resource.flyingResource, 10, resource.airplaneName)}}</div>
+            class="column dark">{{getTypeRequirementsCapacity(module, resource.flyingResource, 10, module.coefficient)}}</div>
           <div
-            class="column light">{{getTypeRequirementsWeight(module, resource.flyingResource, 29, resource.airplaneName)}}</div>
+            class="column light">{{getTypeRequirementsWeight(module, resource.flyingResource, 29, module.coefficient)}}</div>
           <div
-            class="column dark">{{getTypeRequirementsCapacity(module, resource.flyingResource, 98, resource.airplaneName)}}</div>
+            class="column dark">{{getTypeRequirementsCapacity(module, resource.flyingResource, 98, module.coefficient)}}</div>
           <div
-            class="column light">{{getTypeRequirementsWeight(module, resource.flyingResource, 40, resource.airplaneName)}}</div>
+            class="column light">{{getTypeRequirementsWeight(module, resource.flyingResource, 40, module.coefficient)}}</div>
           <div
-            class="column dark">{{getTypeRequirementsCapacity(module, resource.flyingResource, 234.6, resource.airplaneName)}}</div>
+            class="column dark">{{getTypeRequirementsCapacity(module, resource.flyingResource, 234.6, module.coefficient)}}</div>
           <div
-            class="column light">{{getTypeRequirementsWeight(module, resource.flyingResource, 5.5, resource.airplaneName)}}</div>
+            class="column light">{{getTypeRequirementsWeight(module, resource.flyingResource, 5.5, module.coefficient)}}</div>
           <div
-            class="column dark">{{getTypeRequirementsCapacity(module, resource.flyingResource, 45.7, resource.airplaneName)}}</div>
+            class="column dark">{{getTypeRequirementsCapacity(module, resource.flyingResource, 45.7, module.coefficient)}}</div>
         </div>
       </div>
     </div>

@@ -10,4 +10,5 @@ export type ModuleType = {
   type: string;
   value: number;
   count: number;
+  coefficient: number;
 };
