@@ -10,7 +10,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "electron": "electorn .",
-    "electron-build-darwin": "electron-packager . --platform=darwin"
+    "build-darwin": "ng build && electron-packager . --platform=darwin --overwrite",
+    "build-win32": "ng build && electron-packager . --platform=win32 --icon=./src/assets/airplane.ico --overwrite"
   },
   "private": true,
   "dependencies": {
